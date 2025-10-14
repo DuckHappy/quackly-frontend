@@ -4,7 +4,7 @@ export function Logo () {
     return (
         <img 
         src= "/logo.png"
-        alt= "logo"
+        alt= "logo de quackly"
         className="" 
         />
     );
