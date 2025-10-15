@@ -3,9 +3,9 @@ import React from 'react';
 export function Logo () {
     return (
         <img 
-        src= "/logo.png"
+        src= "/quackly-logov1.png"
         alt= "logo de quackly"
-        className="" 
+        className="w-64" 
         />
     );
 }
