@@ -1,6 +1,15 @@
 import { date, email, object, string, z } from "zod";
 
-const genders = ["Masculino", "Femenino", "Otro"] as const;
+const genders = ["empty", "masculino", "femenino", "otro"] as const;
+
+export type Genders = (typeof genders)[number];
+
+export const mappedGenders: { [key in Genders]: string } = {
+  empty: "",
+  masculino: "Masculino",
+  femenino: "Femenino",
+  otro: "Otro",
+};
 
 export const userSchema = z
   .object({
@@ -10,7 +19,7 @@ export const userSchema = z
         message: "El nombre debe contener al menos 3 caracteres.",
       })
       .max(60, {
-        message: "El nombre acepta hasta 80 caracteres.",
+        message: "El nombre acepta hasta 60 caracteres.",
       }),
 
     birthDate: z.coerce
@@ -30,7 +39,7 @@ export const userSchema = z
         { message: "La edad mínima para registrarse es de 16 años" }
       ),
 
-    gender: z.enum(genders, {
+    gender: z.enum(genders).refine((val) => val !== "empty", {
       message: "Debe seleccionar un genero",
     }),
 
@@ -48,8 +57,12 @@ export const userSchema = z
         message: "El usuario debe contener al menos 5 (cinco) caracteres.",
       }),
 
-    password: z.string().min(8),
-    confirmPassword: z.string().min(8),
+    password: z.string().min(8, {
+      message: "La contraseña debe contener al menos 8 (ocho) caracteres.",
+    }),
+    confirmPassword: z.string().nonempty({
+      message: "Vuelva a escribir la contraseña",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Las contraseñas no coinciden",

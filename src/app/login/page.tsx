@@ -1,61 +1,84 @@
 "use client";
 import { Logo } from "@/components/Logo";
-import { useState } from "react";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const loginSchema = z.object({
+    email: z
+    .string()
+    .nonempty({ message: "El correo electronico es requerido." })
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+      message: "El email no tiene un formato válido.",
+    }),
+      password: z.string().nonempty({ message: "La contraseña es requerida." })
+      .min(8, { message: "La contraseña debe contener al menos 8 (ocho) caracteres."})
+});
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+
 
 export default function LoginPage() {
-  return (
-    <>
+    const {register, handleSubmit, formState: {errors}, reset } = useForm({
+             resolver: zodResolver(loginSchema)
+    });
 
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    const onSubmit = (data: LoginFormData) => {
+        localStorage.setItem("loginData", JSON.stringify(data));
+        console.log(data)
+        reset()
+    }
+
+  return (
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
         <div className="flex flex-col justify-center items-center">
              <Logo/>
         
             <h2 className="block mt-10 text-2xl/9 font-bold tracking-tight text-gray-900">
-                Inicia sesión con tu cuenta
+                Ingresa con tu cuenta
             </h2>
         </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
+            <form className="space-y-6" onSubmit = {handleSubmit(onSubmit)} >
                 <div>
-                    <label
-                        className="block text-sm/6 font-medium text-gray-900"
-                        >
-                        Usuario
+                    <label className="block text-sm/6 font-medium text-gray-900">
+                        Correo electronico
                     </label>
                     <div className="mt-2">
                         <input
-                            id="username"
-                            type="username"
-                            name="username"
-                            required
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-400 sm:text-sm/6"
-                        />
+                            type="text"
+                            id="email"
+                            {...register('email')}
+                        /> 
+                        {errors.email && ( <p className="text-red-500 text-sm mt-2 ml-2"> {errors.email.message}</p>)}
                     </div>
                 </div>
-
                     <div>
                         <div className="flex items-center justify-between">
-                            <label
-                                className="block text-sm/6 font-medium text-gray-900"
-                            >
+                            <label className="block text-sm/6 font-medium text-gray-900">
                                 Contraseña
                             </label>
                         </div>
                         <div className="mt-2">
                             <input
-                                id="password"
-                                type="password"
-                                name="password"
-                                required
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-400 sm:text-sm/6"
+                                type="password"
+                                id="password"
+                                {...register('password') }
                             />
+                              {errors.password && (<p className="text-red-500 text-sm mt-2 ml-2"> {errors.password.message} </p> )}
                         </div>
                     </div>
                 <div>
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-sky-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover: focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                        className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs bg-sky-400 hover:bg-amber-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
                         >
                         Iniciar sesión
                     </button>
@@ -63,6 +86,6 @@ export default function LoginPage() {
             </form>
         </div>
     </div>
-    </>
+
   );
 }
