@@ -15,8 +15,11 @@ export const userSchema = z
   .object({
     fullname: z
       .string()
-      .min(3, {
-        message: "El nombre debe contener al menos 3 caracteres.",
+      .nonempty({
+        message: "El campo es requerido.",
+      })
+      .min(6, {
+        message: "El nombre completo debe contener al menos 6 caracteres.",
       })
       .max(60, {
         message: "El nombre acepta hasta 60 caracteres.",
@@ -57,9 +60,12 @@ export const userSchema = z
         message: "El usuario debe contener al menos 5 (cinco) caracteres.",
       }),
 
-    password: z.string().min(8, {
-      message: "La contraseña debe contener al menos 8 (ocho) caracteres.",
-    }),
+    password: z
+      .string()
+      .nonempty({ message: "La contraseña es obligatoria." })
+      .min(8, {
+        message: "La contraseña debe contener al menos 8 (ocho) caracteres.",
+      }),
     confirmPassword: z.string().nonempty({
       message: "Vuelva a escribir la contraseña",
     }),
