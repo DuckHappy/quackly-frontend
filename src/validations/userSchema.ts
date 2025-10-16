@@ -27,7 +27,7 @@ export const userSchema = z
       .refine(
         // z.coerce.date() convierte el string del input en un Date.
         (date) => !isNaN(date.getTime()),
-        { message: "El campo fecha de nacimiento es obligatorio" }
+        { message: "El campo fecha de nacimiento es obligatorio." }
       )
       .refine(
         // .refine() valida la edad mínima de 16 años.
@@ -36,11 +36,11 @@ export const userSchema = z
           const age = today.getFullYear() - date.getFullYear();
           return age >= 16;
         },
-        { message: "La edad mínima para registrarse es de 16 años" }
+        { message: "La edad mínima para registrarse es de 16 años." }
       ),
 
     gender: z.enum(genders).refine((val) => val !== "empty", {
-      message: "Debe seleccionar un genero",
+      message: "Debe seleccionar un genero.",
     }),
 
     email: z
@@ -65,6 +65,6 @@ export const userSchema = z
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contraseñas no coinciden",
+    message: "Las contraseñas no coinciden.",
     path: ["confirmPassword"],
   });

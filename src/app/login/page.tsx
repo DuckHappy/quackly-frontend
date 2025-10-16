@@ -20,8 +20,6 @@ interface LoginFormData {
   password: string;
 }
 
-
-
 export default function LoginPage() {
     const {register, handleSubmit, formState: {errors}, reset } = useForm({
              resolver: zodResolver(loginSchema)
@@ -46,7 +44,7 @@ export default function LoginPage() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" onSubmit = {handleSubmit(onSubmit)} >
                 <div>
-                    <label className="block text-sm/6 font-medium text-gray-900">
+                    <label className="block text-md/6 font-medium text-gray-900">
                         Correo electronico
                     </label>
                     <div className="mt-2">
@@ -61,7 +59,7 @@ export default function LoginPage() {
                 </div>
                     <div>
                         <div className="flex items-center justify-between">
-                            <label className="block text-sm/6 font-medium text-gray-900">
+                            <label className="block text-md/6 font-medium text-gray-900">
                                 Contraseña
                             </label>
                         </div>
@@ -75,10 +73,10 @@ export default function LoginPage() {
                               {errors.password && (<p className="text-red-500 text-sm mt-2 ml-2"> {errors.password.message} </p> )}
                         </div>
                     </div>
-                <div>
+                <div className="flex flex-col justify-center items-center">
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs bg-sky-400 hover:bg-amber-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                        className="flex justify-center rounded-md mt-2 px-3 py-1.5 text-sm/6 font-semibold text-black shadow-xs bg-amber-300 hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
                         >
                         Iniciar sesión
                     </button>
