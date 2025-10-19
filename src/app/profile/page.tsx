@@ -1,30 +1,49 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import { Post } from "./Post";
+import { EditProfile } from "./EditProfile";
 
-export default async function ProfilePage() {
-  // Ejemplo: datos simulados (en SSR podrías obtenerlos desde una API o base de datos)
+export default function ProfilePage() {
+  const [showModal, setShowModal] = useState(false);
+  const [bio, setBio] = useState("Cuéntanos un poco sobre ti...");
+  const [avatar, setAvatar] = useState("/avatars/duckPro.png");
+
   const user = {
-    username: "DuckHappy#1234",
+    username: "DuckHappy",
     online: true,
     friends: 7,
     lagoons: 3,
     quacks: 42,
     followers: 58,
-    bio: "Cuéntanos un poco sobre ti...",
-    avatar: "/avatars/duckPro.png", // imagen local o URL remota
   };
 
   const posts = [
-    { id: 1, content: "¡Hola desde mi laguna!", likes: 5, comments: 3, shares: 2 },
-    { id: 2, content: "Día perfecto para nadar 🦆", likes: 5, comments: 3, shares: 2 },
+    {
+      id: 1,
+      content: "Dos patos en una carrera, ¿sabes cómo acaban?... Empatados",
+      likes: 5,
+      comments: 3,
+      shares: 2,
+      time: "2h",
+    },
+    {
+      id: 2,
+      content: "Día perfecto para nadar 🦆",
+      likes: 5,
+      comments: 3,
+      shares: 2,
+      time: "3h",
+    },
   ];
 
   return (
-    <main className="flex flex-col items-center bg-sky-300 min-h-screen py-8">
-      {/* Perfil Header */}
+    <main className="flex flex-col items-center min-h-screen py-10 bg-gradient-to-b to-sky-200">
+      {/* Perfil */}
       <section className="bg-sky-200 rounded-2xl shadow-md p-6 w-[360px] text-center">
         <div className="flex flex-col items-center">
           <Image
-            src={user.avatar}
+            src={avatar}
             alt="avatar"
             width={80}
             height={80}
@@ -55,43 +74,45 @@ export default async function ProfilePage() {
           </div>
         </div>
 
-        <p className="text-gray-700 mt-3">{user.bio}</p>
-        <button className="mt-2 bg-sky-300 hover:bg-sky-400 text-sm font-medium py-1 px-3 rounded-lg transition">
-          Editar biografía
+        <p className="text-gray-700 mt-3">{bio}</p>
+
+        <button
+          onClick={() => setShowModal(true)}
+          className="mt-2 bg-sky-300 hover:bg-sky-400 text-sm font-medium py-1 px-3 rounded-lg transition"
+        >
+          Editar perfil
         </button>
       </section>
 
       {/* Publicaciones */}
       <section className="mt-6 w-[360px] space-y-4">
-        {posts.map((post) => (
-          <article
-            key={post.id}
-            className="bg-sky-50 border border-sky-200 rounded-xl shadow-sm p-4"
-          >
-            <div className="flex items-center mb-2">
-              <Image
-                src={user.avatar}
-                alt="duck icon"
-                width={36}
-                height={36}
-                className="rounded-full mr-2"
-              />
-              <div>
-                <p className="font-semibold text-sm">{user.username}</p>
-                <p className="text-xs text-gray-500">2h</p>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-800">{post.content}</p>
-
-            <div className="flex justify-around text-gray-600 text-sm mt-3">
-              <span>🩵 {post.likes}</span>
-              <span>💬 {post.comments}</span>
-              <span>🔁 {post.shares}</span>
-            </div>
-          </article>
+        {posts.map((p) => (
+          <Post
+            key={p.id}
+            avatar={avatar}
+            username={user.username}
+            time={p.time}
+            content={p.content}
+            likes={p.likes}
+            comments={p.comments}
+            shares={p.shares}
+          />
         ))}
       </section>
+
+      {/* Modal */}
+      {showModal && (
+        <EditProfile
+          initialBio={bio}
+          initialAvatar={avatar}
+          onClose={() => setShowModal(false)}
+          onSave={(newBio, newAvatar) => {
+            setBio(newBio);
+            setAvatar(newAvatar);
+            // alert("🦆 Perfil actualizado (simulado)");
+          }}
+        />
+      )}
     </main>
   );
 }
