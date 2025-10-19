@@ -1,18 +1,18 @@
 export const mainCategories = [
-  { name: "Videojuegos", image: "/quack-default-profile.svg" },
-  { name: "Anime", image: "/quack-default-profile.svg" },
-  { name: "Música", image: "/quack-default-profile.svg" },
-  { name: "Arte", image: "/quack-default-profile.svg" },
+  { name: "Videojuegos", image: "/images/duck-headset.png" },
+  { name: "Anime", image: "/images/duck-pro.png" },
+  { name: "Música", image: "/images/duck-music.png" },
+  { name: "Arte", image: "/images/duck-boy.png" },
 ];
 
 export const popularCommunities = [
-  { name: "Videojuegos", image: "/quack-default-profile.svg" },
-  { name: "Anime", image: "/quack-default-profile.svg" },
-  { name: "Música", image: "/quack-default-profile.svg" },
+  { name: "Videojuegos", image: "/images/duck-headset.png" },
+  { name: "Anime", image: "/images/duck-pro.png" },
+  { name: "Música", image: "/images/duck-music.png" },
 ];
 
 export const recommendedCommunities = [
-  { name: "Arte", image: "/quack-default-profile.svg" },
-  { name: "Anime", image: "/quack-default-profile.svg" },
-  { name: "Videojuegos", image: "/quack-default-profile.svg" },
+  { name: "Arte", image: "/images/duck-boy.png" },
+  { name: "Anime", image: "/images/duck-pro.png" },
+  { name: "Videojuegos", image: "/images/duck-headset.png" },
 ];

@@ -4,7 +4,7 @@ import CategoryCard from "./CategoryCard";
 interface CategoryGridProps {
   title: string;
   subtitle?: string;
-  items: { name: string; image: string }[];
+  items: { name: string; image: string , isJoined?: boolean}[];
 }
 
 export default function CategoryGrid({ title, subtitle, items }: CategoryGridProps) {
@@ -14,7 +14,7 @@ export default function CategoryGrid({ title, subtitle, items }: CategoryGridPro
 
       <div className="flex flex-wrap gap-4">
         {items.map((item) => (
-          <CategoryCard key={item.name} name={item.name} image={item.image} />
+          <CategoryCard key={item.name} name={item.name} image={item.image} isJoined={item.isJoined} />
         ))}
       </div>
     </section>
