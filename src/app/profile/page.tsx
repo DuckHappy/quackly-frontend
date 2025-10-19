@@ -10,7 +10,7 @@ export default async function ProfilePage() {
     quacks: 42,
     followers: 58,
     bio: "Cuéntanos un poco sobre ti...",
-    avatar: "/duck-avatar.png", // imagen local o URL remota
+    avatar: "/avatars/duckPro.png", // imagen local o URL remota
   };
 
   const posts = [
@@ -19,7 +19,7 @@ export default async function ProfilePage() {
   ];
 
   return (
-    <main className="flex flex-col items-center bg-sky-100 min-h-screen py-8">
+    <main className="flex flex-col items-center bg-sky-300 min-h-screen py-8">
       {/* Perfil Header */}
       <section className="bg-sky-200 rounded-2xl shadow-md p-6 w-[360px] text-center">
         <div className="flex flex-col items-center">
