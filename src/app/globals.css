@@ -2,18 +2,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: var(--skyblue);
-  --black: oklch(0 0 0);
-  --skyblue: oklch(80.74% 0.134 220.62);
-  --white: oklch(1 0 0);
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-/* @media (prefers-color-scheme: dark) {
+
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: oklch(0 0 0);
+    --background: #0a0a0a;
     --foreground: #ededed;
   }
-} */
+}
 
 body {
   background: var(--background);
