@@ -1,5 +1,4 @@
 "use client";
-import { Logo } from "@/components/Logo";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';

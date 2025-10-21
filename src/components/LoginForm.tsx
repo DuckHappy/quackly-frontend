@@ -27,7 +27,6 @@ interface LoginFormData {
 const onSubmit = (data: LoginFormData) => {
   localStorage.setItem("loginData", JSON.stringify(data));
   console.log(data);
-  reset();
 };
 
 export function LoginForm() {
@@ -47,7 +46,7 @@ export function LoginForm() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-md/6 font-medium text-gray-900">
               Correo electronico
