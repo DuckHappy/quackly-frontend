@@ -1,91 +1,39 @@
 "use client";
-import { z } from "zod";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginForm } from "./LoginForm";
 
-const loginSchema = z.object({
-  email: z
-    .string()
-    .nonempty({ message: "El correo electronico es requerido." })
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-      message: "El email no tiene un formato válido.",
-    }),
-  password: z
-    .string()
-    .nonempty({ message: "La contraseña es requerida." })
-    .min(8, {
-      message: "La contraseña debe contener al menos 8 (ocho) caracteres.",
-    }),
-});
 
-interface LoginFormData {
-  email: string;
-  password: string;
+
+interface AuthModalProps {
+  mode: "login" | "register";
+  onClose: () => void;
 }
 
 
-export default function AuthModal() {
-    const {register, handleSubmit, formState: {errors}, reset } = useForm({
-        resolver: zodResolver(loginSchema)
-    });
-    
-    const onSubmit = (data: LoginFormData) => {
-        localStorage.setItem("loginData", JSON.stringify(data));
-        console.log(data)
-        reset()
-    }
+export default function AuthModal ({ mode, onClose } : AuthModalProps) {
+  // // Función para cerrar al hacer clic en el fondo
+  // const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   if (e.target === e.currentTarget) {
+  //     onClose();
+  //   }
+  // };
+
   return (
-    <dialog open>
-      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label className="block text-md/6 font-medium text-gray-900">
-            Correo electronico
-          </label>
-          <div className="mt-2">
-            <input
-              className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-400 sm:text-sm/6"
-              type="text"
-              id="email"
-              {...register("email")}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-2 ml-2">
-                {" "}
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <label className="block text-md/6 font-medium text-gray-900">
-              Contraseña
-            </label>
-          </div>
-          <div className="mt-2">
-            <input
-              className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-400 sm:text-sm/6"
-              type="password"
-              id="password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-2 ml-2">
-                {" "}
-                {errors.password.message}{" "}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col justify-center items-center">
-          <button
-            type="submit"
-            className="flex justify-center rounded-md mt-2 px-3 py-1.5 text-sm/6 font-semibold text-black shadow-xs bg-amber-300 hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-          >
-            Iniciar sesión
-          </button>
-        </div>
-      </form>
-    </dialog>
-  );
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleBackdropClick}
+    >
+      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6 relative">
+        {/* Botón de cerrar */}
+        <button
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+          onClick={onClose}
+        >
+          ✕
+        </button>
+
+        {/* Contenido del modal según mode */}
+        {mode === "login" ? <LoginForm /> : <RegisterForm />}
+      </div>
+    </div>
+  )
 }
