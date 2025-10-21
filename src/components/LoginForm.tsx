@@ -27,7 +27,6 @@ interface LoginFormData {
 const onSubmit = (data: LoginFormData) => {
   localStorage.setItem("loginData", JSON.stringify(data));
   console.log(data);
-  reset();
 };
 
 export function LoginForm() {
