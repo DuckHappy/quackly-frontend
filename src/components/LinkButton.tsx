@@ -3,10 +3,11 @@ import Link from "next/link";
 type Props = {
   label: string;
   variant: "primary" | "secondary";
-  onClick: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   href: string;
 };
 
+// Aveces el click abre un modal y otras veces navega. (segun el contexto, varia su comportamiento)
 export default function LinkButton({ label, onClick, variant, href }: Props) {
   const baseStyles =
     "min-w-50 px-4 py-2 rounded-full text-center font-semibold transition-colors duration-200 mt-4";
@@ -18,8 +19,8 @@ export default function LinkButton({ label, onClick, variant, href }: Props) {
 
   return (
     <Link
-      href={href}
-      onNavigate={onClick}
+      href={href} // Ruta de navegación
+      onClick={onClick} // Acción personalizada al hacer clic
       className={`${baseStyles} ${variantStyles}`}
     >
       {label}
