@@ -4,19 +4,29 @@ import {useForm} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { mappedGenders, userSchema } from '@/validations/userSchema';
 
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
 export default function RegisterPage() {
-  const {register, handleSubmit, formState: {errors}} = useForm({
+  const {register, handleSubmit, reset, formState: {errors}} = useForm({
     resolver: zodResolver(userSchema)
   });
 
   const genderOptions = Object.entries(mappedGenders).map(([key, value]) => (
     <option value={key} key={key}> {value} </option>
   ));
+
+  const onSubmit = (data: LoginFormData) => {
+        localStorage.setItem("loginData", JSON.stringify(data));
+        console.log(data)
+        reset()
+    }
   
   return (
 
-    <form className="max-w-md mx-auto" onSubmit={handleSubmit(data => {console.log(data)})}>
+    <form className="max-w-md mx-auto" onSubmit = {handleSubmit(onSubmit)}>
       
       <label className="block mb-2 mt-5 text-md font-medium text-black" htmlFor="fullname"> Nombre completo </label>
       <input className='shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2 '
