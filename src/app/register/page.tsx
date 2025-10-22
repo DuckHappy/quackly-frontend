@@ -27,7 +27,7 @@ export default function RegisterPage() {
   
   return (
 
-    <form className="max-w-md mx-auto" onSubmit={handleSubmit(data => {console.log(data)})}>
+    <form className="max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
       
       <label className="block mb-2 mt-5 text-md font-medium text-black" htmlFor="fullname"> Nombre completo </label>
       <input className='shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2 '
