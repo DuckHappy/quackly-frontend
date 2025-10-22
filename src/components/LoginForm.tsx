@@ -1,8 +1,10 @@
 "use client";
+import React, { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
   email: z
@@ -24,16 +26,46 @@ interface LoginFormData {
   password: string;
 }
 
-const onSubmit = (data: LoginFormData) => {
-  localStorage.setItem("loginData", JSON.stringify(data));
-  console.log(data);
-};
-
 export function LoginForm() {
     
+    const router = useRouter();
+    const [error, setError] = useState<string | null>(null);
     const {register, handleSubmit, reset, formState: {errors}} = useForm({
     resolver: zodResolver(loginSchema)
   });
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      setError(null);
+      localStorage.setItem("loginData", JSON.stringify(data));
+      const urlQuack = "https://quackly.onrender.com/users/login";
+
+      const res = await fetch(urlQuack, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const message =
+          (errBody && (errBody.message || errBody.error)) ||
+          "Email o contraseña incorrectos.";
+        setError(message);
+        console.error("Login failed:", res.status, errBody);
+        return;
+      }
+
+      const body = await res.json();
+      localStorage.setItem("userToken", body.access_token);
+      router.push("/home");
+    } catch (err) {
+      console.error(err);
+      setError("Ocurrió un error inesperado. Intenta nuevamente.");
+    }
+  };
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
@@ -87,6 +119,14 @@ export function LoginForm() {
               )}
             </div>
           </div>
+
+          {/* muestra el mensaje de error del servidor */}
+          {error && (
+            <div>
+              <p className="text-red-600 text-sm mt-2 ml-2">{error}</p>
+            </div>
+          )}
+
           <div className="flex flex-col justify-center items-center">
             <button
               type="submit"
