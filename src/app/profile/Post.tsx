@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 type PostProps = {
-  postId?: string; // for the backend
+  postId?: string;
   avatar: string;
   username: string;
   time: string;
@@ -28,16 +28,9 @@ export function Post({
   const [shareCount, setShareCount] = useState(shares);
   const [liked, setLiked] = useState(false);
 
-  // Simulated (backend: /api/posts/:id/like)
-  const handleLike = async () => {
+  const handleLike = () => {
     setLiked(!liked);
     setLikeCount((prev) => prev + (liked ? -1 : 1));
-
-    // Real conection:
-    // if (postId) {
-    //   const res = await fetch(`/api/posts/${postId}/like`, { method: "POST" });
-    //   if (res.ok) setLikeCount(prev => prev + (liked ? -1 : 1));
-    // }
   };
 
   const handleComment = () => {
@@ -71,7 +64,6 @@ export function Post({
       <div className="flex justify-around text-gray-700 text-sm mt-3">
         <button
           onClick={handleLike}
-          aria-label="Dar like"
           className={`flex items-center gap-1 transition ${
             liked ? "text-sky-600" : "hover:text-sky-500"
           }`}
@@ -81,7 +73,6 @@ export function Post({
 
         <button
           onClick={handleComment}
-          aria-label="Comentar post"
           className="flex items-center gap-1 hover:text-sky-500 transition"
         >
           💬 {commentCount}
@@ -89,7 +80,6 @@ export function Post({
 
         <button
           onClick={handleShare}
-          aria-label="Compartir post"
           className="flex items-center gap-1 hover:text-sky-500 transition"
         >
           🔁 {shareCount}
