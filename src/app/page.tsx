@@ -2,7 +2,6 @@
 'use client'
 import { Title } from "@/components/Title";
 import { Button } from "@/components/Button";
-import { AuthModal } from "@/components/AuthModal";
 import Image from "next/image";
 import { Logo } from "@/components/Logo";
 import LinkButton from "@/components/LinkButton";
@@ -18,3 +17,4 @@ export default function Home() {
     </main>
   );
 }
+
