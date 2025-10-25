@@ -6,7 +6,7 @@ import { mainCategories, popularCommunities, recommendedCommunities } from "./da
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen bg--skyblue p-6 space-y-8">
+    <div className="min-h-screen w-full bg--skyblue p-6 space-y-8">
       <CommunityHeader />
 
       <CategoryGrid title="Explora comunidades" subtitle="Únete a lagunas llenas de quacks" items={mainCategories} />
