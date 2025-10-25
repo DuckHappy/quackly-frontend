@@ -1,10 +1,14 @@
-"use client";
-import { useState } from "react";
-import { Post } from "../profile/Post";
+import { HomeClient } from "./HomeClient";
 
-export default function HomePage() {
-
-    const posts = [
+// Simular obtención de posts desde el servidor
+async function getPosts() {
+  // En un caso real esto sería un fetch a tu API
+  // const res = await fetch("https://api.quackly.com/posts", { cache: "no-store" });
+  
+  // Simulación de delay para demostrar loading state
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  return [
     {
       id: 1,
       avatar: "/avatars/duckPro.png",
@@ -46,27 +50,10 @@ export default function HomePage() {
       time: "8h",
     },
   ];
-    return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="flex flex-col justify-center items-center">
-                <h2 className="block mt-10 text-2xl/9 font-bold tracking-tight text-gray-900">
-                    Bienvenido a Quackly
-                </h2>
-                <section className="mt-6 w-[360px] space-y-4">
-                        {posts.map((p) => (
-                          <Post
-                            key={p.id}
-                            avatar={p.avatar}
-                            username={p.username}
-                            time={p.time}
-                            content={p.content}
-                            likes={p.likes}
-                            comments={p.comments}
-                            shares={p.shares}
-                          />
-                        ))}
-                      </section>
-            </div>
-        </div>
-    );
+}
+
+export default async function HomePage() {
+  const posts = await getPosts();
+  
+  return <HomeClient posts={posts} />;
 }
