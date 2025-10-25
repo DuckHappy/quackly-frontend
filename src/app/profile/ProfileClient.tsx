@@ -5,7 +5,33 @@ import Image from "next/image";
 import { Post } from "./Post";
 import { EditProfile } from "./EditProfile";
 
-export function ProfileClient({ user, posts }: any) {
+interface Post {
+  id: number;
+  avatar?: string;
+  username?: string;
+  content: string;
+  likes: number;
+  comments: number;
+  shares: number;
+  time: string;
+}
+interface User {
+  username: string;
+  online: boolean;
+  friends: number;
+  lagoons: number;
+  quacks: number;
+  followers: number;
+  bio: string;
+  avatar: string;
+}
+
+interface ProfileClientProps {
+  posts: Post[];
+  user: User;
+}
+
+export function ProfileClient({ user, posts }: ProfileClientProps) {
   const [showModal, setShowModal] = useState(false);
   const [bio, setBio] = useState(user.bio);
   const [avatar, setAvatar] = useState(user.avatar);
@@ -58,7 +84,7 @@ export function ProfileClient({ user, posts }: any) {
 
       {/* Publicaciones */}
       <section className="mt-6 w-[360px] space-y-4">
-        {posts.map((p: any) => (
+        {posts.map((p: Post) => (
           <Post
             key={p.id}
             avatar={avatar}
