@@ -1,5 +1,5 @@
 "use client";
-import { Post } from "../profile/Post";
+import { Post } from "../profile/components/Post";
 
 interface Post {
   id: number;
