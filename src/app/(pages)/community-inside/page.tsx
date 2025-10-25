@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Post } from "../profile/components/Post";
 import CategoryButton from "../community/components/CategoryButton"; 
+import JoinButton from "@/components/JoinButton";
 
 
 // ======= Simular datos desde el servidor (SSR) =======
@@ -103,10 +104,7 @@ export default async function CommunityPage() {
               <strong>{community.online}</strong> Online
             </p>
           </div>
-
-          <button className="mt-4 w-full bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg shadow-sm">
-            Join
-          </button>
+            <JoinButton/>
         </aside>
       </div>
     </main>
