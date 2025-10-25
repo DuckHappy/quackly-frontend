@@ -5,6 +5,7 @@ import { posts as seed } from '@/data/seedPosts';
 import PostCard from '@/components/PostCard';
 import FAB from '@/components/FAB';
 import PostModal from '@/components/PostModal';
+
 export default function Feed(){
   const [items, setItems] = useState(seed);
   const [open, setOpen] = useState(false);
