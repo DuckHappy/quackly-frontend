@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Post } from "../profile/components/Post";
 import CategoryButton from "../community/components/CategoryButton"; 
-import JoinButton from "@/components/JoinButton";
+
 
 
 // ======= Simular datos desde el servidor (SSR) =======
@@ -45,6 +45,11 @@ async function getPosts() {
 export default async function CommunityPage() {
   const community = await getCommunityData();
   const posts = await getPosts();
+
+
+  const handleClick = async () => {
+  }
+
 
   return (
     <main className="min-h-screen bg-gradient-to-b to-sky-200 flex flex-col items-center py-8">
@@ -104,7 +109,7 @@ export default async function CommunityPage() {
               <strong>{community.online}</strong> Online
             </p>
           </div>
-            <JoinButton/>
+            {/* <CategoryButton /> */}
         </aside>
       </div>
     </main>
