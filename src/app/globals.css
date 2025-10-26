@@ -6,6 +6,9 @@
   --black: oklch(0 0 0);
   --skyblue: oklch(80.74% 0.134 220.62);
   --white: oklch(1 0 0);
+  --yellow: #FFD60A;
+  --yellowHover: #F2C400;
+  --ink: #111111;
 }
 
 /* @media (prefers-color-scheme: dark) {

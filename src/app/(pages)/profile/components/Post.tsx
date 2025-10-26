@@ -47,7 +47,7 @@ export function Post({
     <article className="bg-sky-50 border border-sky-200 rounded-xl shadow-sm p-4">
       <div className="flex items-center mb-2">
         <Image
-          src={avatar}
+          src={avatar || '/quackly-logov1.png'}
           alt={`${username} avatar`}
           width={36}
           height={36}
