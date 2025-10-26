@@ -1,5 +1,8 @@
 "use client";
+import React, { useState } from 'react';
 import { Post } from "../profile/components/Post";
+import FAB from '@/components/FAB';
+import PostModal from '@/components/PostModal';
 
 interface Post {
   id: number;
@@ -16,7 +19,26 @@ interface HomeClientProps {
   posts: Post[];
 }
 
-export function HomeClient({ posts }: HomeClientProps) {
+export function HomeClient({ posts: initialPosts }: HomeClientProps) {
+  const [posts, setPosts] = useState(initialPosts);
+  const [open, setOpen] = useState(false);
+
+  function addPost({text}: {text:string}) {
+
+    const newPost = {
+        id: Math.random(),
+        avatar: '',
+        username: '@you',
+        content: text,
+        likes: 0,
+        comments: 0,
+        shares: 0,
+        time: 'now'
+      };
+      
+    setPosts(current => [newPost, ...current]);
+  }
+
   return (
     <div className="flex min-h-full w-full flex-col px-6 py-12 lg:px-8">
       <div className="flex flex-col justify-center items-center">
@@ -36,6 +58,8 @@ export function HomeClient({ posts }: HomeClientProps) {
               shares={p.shares}
             />
           ))}
+                <FAB onClick={()=>setOpen(true)} />
+                <PostModal open={open} onClose={()=>setOpen(false)} onPost={addPost} />
         </section>
       </div>
     </div>
