@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Post } from "./Post";
-import { EditProfile } from "./EditProfile";
-import { ProfileClient } from "./ProfileClient";
+import { Post } from "./components/Post";
+import { EditProfile } from "./components/EditProfile";
+import { ProfileClient } from "./components/ProfileClient";
 
 // Simular obtener datos del usuario desde servidor
 async function getUserData() {
@@ -45,7 +45,7 @@ export default async function ProfilePage() {
   const posts = await getPosts();
 
   return (
-    <main className="flex flex-col items-center min-h-screen py-10 bg-gradient-to-b to-sky-200">
+    <main className="flex flex-col items-center min-h-screen py-10 bg-gradient-to-b ">
       {/* Perfil */}
       <ProfileClient user={user} posts={posts} />
     </main>

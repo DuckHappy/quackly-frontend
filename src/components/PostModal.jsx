@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import styles from '@/styles/animations.module.css';
-import Button from '@/components/Button';
+import styles from '../app/animations.module.css';
+import  ButtonModal from '@/components/ButtonModal';
 
 export default function PostModal({ open, onClose, onPost }) {
   const [text, setText] = useState('');
@@ -17,7 +17,7 @@ export default function PostModal({ open, onClose, onPost }) {
   return (
     <div className={styles.modalBackdrop} role="dialog" aria-modal="true">
       <div className={styles.modal}>
-        <h3>What’s quacking?</h3>
+        <h3>Publicar</h3>
         <form onSubmit={submit}>
           <textarea
             value={text}
@@ -27,10 +27,10 @@ export default function PostModal({ open, onClose, onPost }) {
             required
           />
           <div className={styles.modalActions}>
-            <Button type="button" onClick={onClose}>
+            <ButtonModal type="button" onClick={onClose}>
               Cancelar
-            </Button>
-            <Button
+            </ButtonModal>
+            <ButtonModal
               type="submit"
               style={{
                 backgroundColor: 'var(--yellow)',
@@ -40,7 +40,7 @@ export default function PostModal({ open, onClose, onPost }) {
               }}
             >
               QUACK
-            </Button>
+            </ButtonModal>
           </div>
         </form>
       </div>
