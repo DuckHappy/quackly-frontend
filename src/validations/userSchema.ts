@@ -1,6 +1,6 @@
 import { date, email, object, string, z } from "zod";
 
-const genders = ["empty", "masculino", "femenino", "otro"] as const;
+const genders = ["empty", "masculino", "femenino"] as const;
 
 export type Genders = (typeof genders)[number];
 
@@ -8,7 +8,6 @@ export const mappedGenders: { [key in Genders]: string } = {
   empty: "",
   masculino: "Masculino",
   femenino: "Femenino",
-  otro: "Otro",
 };
 
 export const userSchema = z
