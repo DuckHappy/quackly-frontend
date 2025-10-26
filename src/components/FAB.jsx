@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from '@/styles/animations.module.css';
+import styles from '../app/animations.module.css';
 export default function FAB({ onClick }){
   return (
     <button className={styles.fab} aria-label="Crear publicación" onClick={onClick}>
