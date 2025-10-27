@@ -2,8 +2,6 @@ import Image from "next/image";
 import { Post } from "../profile/components/Post";
 import CategoryButton from "../community/components/CategoryButton"; 
 
-
-
 // ======= Simular datos desde el servidor (SSR) =======
 async function getCommunityData() {
   return {
@@ -45,10 +43,6 @@ async function getPosts() {
 export default async function CommunityPage() {
   const community = await getCommunityData();
   const posts = await getPosts();
-
-
-  const handleClick = async () => {
-  }
 
 
   return (

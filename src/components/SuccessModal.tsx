@@ -6,11 +6,16 @@ interface SuccessModalProps {
   redirectTo?: string;
 }
 
+<<<<<<< HEAD
 export default function SuccessModal({
   message,
   onClose,
   redirectTo,
 }: SuccessModalProps) {
+=======
+export default function SuccessModal({ message, onClose, redirectTo }: SuccessModalProps) {
+    
+>>>>>>> 623ba91ed32aefa91ad5c14e68bcf2aa8a29ff48
   const handleButtonClick = () => {
     onClose();
     if (redirectTo) {
