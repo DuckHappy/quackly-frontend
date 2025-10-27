@@ -158,7 +158,7 @@ export default function RegisterForm() {
         <div className="flex justify-center items-center mt-4">
           <button
             type="submit"
-            className="w-1/2 sm:w-1/3 text-black font-semibold bg-amber-300 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-sm px-5 py-2"
+            className="w-1/2 sm:w-1/3 text-black font-semibold bg-amber-300 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-sm px-5 py-2"
           >
             Registrarse
           </button>

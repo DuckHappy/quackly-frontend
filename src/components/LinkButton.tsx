@@ -14,8 +14,8 @@ export default function LinkButton({ label, onClick, variant, href }: Props) {
 
   const variantStyles =
     variant === "primary"
-      ? "bg-white text-black hover:bg-sky-300 mt-4"
-      : "bg-yellow-300 text-black hover:bg-sky-300";
+      ? "bg-white text-black mt-4 hover:bg-blue-400"
+      : "bg-yellow-300 text-black hover:bg-blue-400";
 
   return (
     <Link
