@@ -1,16 +1,29 @@
 import Image from "next/image";
-import { Post } from "../profile/components/Post";
-import CategoryButton from "../community/components/CategoryButton"; 
+import { Post } from "../../profile/components/Post";
+import { Metadata } from "next";
+
+interface Props {
+  params: { slug: string };
+}
 
 // ======= Simular datos desde el servidor (SSR) =======
-async function getCommunityData() {
+async function getCommunityData(slug: string) {
   return {
-    name: "Juego",
+    name: slug.charAt(0).toUpperCase() + slug.slice(1),
     //here we going to need the bot
     description: " juego de acción y aventuras en 2D con un estilo artístico hand-drawn.",
     members: 5000,
     online: 25,
     logo: "/avatars/duckVer1.png",
+  };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const community = await getCommunityData(slug);
+  return {
+    title: `${community.name} - Quackly`,
+    description: community.description,
   };
 }
 
@@ -40,8 +53,9 @@ async function getPosts() {
 }
 
 // ======= Componente principal SSR =======
-export default async function CommunityPage() {
-  const community = await getCommunityData();
+export default async function CommunityPage({ params }: Props) {
+  const { slug } = await params;
+  const community = await getCommunityData(slug);
   const posts = await getPosts();
 
 
@@ -56,7 +70,7 @@ export default async function CommunityPage() {
           height={60}
           className="rounded-full"
         />
-        <h1 className="text-3xl font-bold text-sky-900">r/{community.name}</h1>
+        <h1 className="text-3xl font-bold text-sky-900">{community.name}</h1>
       </header>
 
       {/* Layout principal */}
@@ -104,7 +118,7 @@ export default async function CommunityPage() {
               <strong>{community.online}</strong> Online
             </p>
           </div>
-            {/* <CategoryButton /> */}
+          {/* <CategoryButton /> */}
         </aside>
       </div>
     </main>
