@@ -56,7 +56,7 @@ export function ProfileClient({ user, posts: initialPosts }: ProfileClientProps)
   return (
     <>
       {/* Tarjeta de perfil */}
-      <section className="bg-sky-200 rounded-2xl shadow-md p-6 w-[360px] text-center profile-card overflow-auto">
+      <section className="bg-sky-200 rounded-2xl shadow-md p-6 w-[360px] min-h-fit text-center profile-card overflow-auto">
         <div className="profile-header flex flex-col items-center">
           <Image
             src={avatar}

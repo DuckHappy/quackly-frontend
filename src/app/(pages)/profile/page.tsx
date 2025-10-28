@@ -42,7 +42,7 @@ export default async function ProfilePage() {
   const posts = await getPosts();
 
   return (
-    <main className="flex flex-col items-center min-h-screen py-10 bg-gradient-to-b ">
+    <main className="flex flex-col items-center min-h-screen py-10">
       {/* Perfil */}
       <ProfileClient user={user} posts={posts} />
     </main>
