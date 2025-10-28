@@ -40,7 +40,7 @@ export function ProfileClient({ user, posts: initialPosts }: ProfileClientProps)
   const [posts, setPosts] = useState(initialPosts);
   const [openPostModal, setOpenPostModal] = useState(false);
 
-  function addPost({text}: {text:string}) {
+  function addPost({ text }: { text: string }) {
     const newPost = {
       id: Math.random(),
       content: text,
@@ -49,7 +49,7 @@ export function ProfileClient({ user, posts: initialPosts }: ProfileClientProps)
       shares: 0,
       time: 'now'
     };
-    
+
     setPosts(current => [newPost, ...current]);
   }
 

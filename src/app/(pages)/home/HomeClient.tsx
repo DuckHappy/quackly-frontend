@@ -23,19 +23,19 @@ export function HomeClient({ posts: initialPosts }: HomeClientProps) {
   const [posts, setPosts] = useState(initialPosts);
   const [open, setOpen] = useState(false);
 
-  function addPost({text}: {text:string}) {
+  function addPost({ text }: { text: string }) {
 
     const newPost = {
-        id: Math.random(),
-        avatar: '',
-        username: '@you',
-        content: text,
-        likes: 0,
-        comments: 0,
-        shares: 0,
-        time: 'now'
-      };
-      
+      id: Math.random(),
+      avatar: '',
+      username: '@you',
+      content: text,
+      likes: 0,
+      comments: 0,
+      shares: 0,
+      time: 'now'
+    };
+
     setPosts(current => [newPost, ...current]);
   }
 
@@ -49,6 +49,7 @@ export function HomeClient({ posts: initialPosts }: HomeClientProps) {
           {posts.map((p) => (
             <Post
               key={p.id}
+              postId={p.id}
               avatar={p.avatar}
               username={p.username}
               time={p.time}
@@ -56,10 +57,11 @@ export function HomeClient({ posts: initialPosts }: HomeClientProps) {
               likes={p.likes}
               comments={p.comments}
               shares={p.shares}
+              onDelete={(id) => setPosts(posts.filter(post => post.id !== id))}
             />
           ))}
-                <FAB onClick={()=>setOpen(true)} />
-                <PostModal open={open} onClose={()=>setOpen(false)} onPost={addPost} />
+          <FAB onClick={() => setOpen(true)} />
+          <PostModal open={open} onClose={() => setOpen(false)} onPost={addPost} />
         </section>
       </div>
     </div>
