@@ -40,7 +40,7 @@ export function HomeClient({ posts: initialPosts }: HomeClientProps) {
   }
 
   return (
-    <div className="flex min-h-full w-full flex-col px-6 py-12 lg:px-8">
+    <div className="flex min-h-full w-full flex-col px-6 py-12 lg:px-8 overflow-auto" >
       <div className="flex flex-col justify-center items-center">
         <h2 className="block mt-10 text-2xl/9 font-bold tracking-tight text-gray-900">
           Inicio
