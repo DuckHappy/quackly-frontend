@@ -9,7 +9,7 @@ const items = [
 ];
 export default function Navbar() {
   return (
-    <aside style={{ left: 16, top: 16, bottom: 16, width: 68, background: 'rgba(255, 255, 255, 0.8)', border: '1px solid oklch(0.9971 0 145)', borderRadius: 16, boxShadow: '0 10px 28px rgba(0,0,0,.08)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px 8px', gap: 12 }}>
+    <aside style={{ left: 16, top: 16, bottom: 16, width: 68, background: 'rgba(255, 255, 255, 0.8)', border: '1px solid oklch(0.9971 0 145)', borderRadius: 16, boxShadow: '0 10px 28px rgba(0,0,0,.08)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px 8px', gap: 12, position:"fixed", zIndex: 50, }}>
       {items.map(it => (
         <a href={it.url} key={it.key}>
           <button key={it.key} aria-label={it.key} style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: 10 }}
