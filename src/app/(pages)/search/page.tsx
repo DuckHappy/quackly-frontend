@@ -22,7 +22,7 @@ const COMMUNITIES = [
 
 export default function SearchPage() {
     const [q, setQ] = useState('');
-    const norm = (s) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
 
     const filtered = useMemo(() => {
         if (!q) return { posts: POSTS, users: USERS, communities: COMMUNITIES };
