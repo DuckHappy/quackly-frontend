@@ -66,6 +66,7 @@ export default async function CommunityPage() {
           {posts.map((post) => (
             <Post
               key={post.id}
+              postId={post.id}
               avatar={post.avatar}
               username={post.username}
               time={post.time}

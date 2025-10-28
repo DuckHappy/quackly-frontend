@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { Post } from "./components/Post";
-import { EditProfile } from "./components/EditProfile";
 import { ProfileClient } from "./components/ProfileClient";
 
 // Simular obtener datos del usuario desde servidor
