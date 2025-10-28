@@ -70,7 +70,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex justify-center items-start w-full mt-8">
+    <div className="flex justify-center items-start w-full mt-8 overflow-auto">
       <form
         className="w-full max-w-xl bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-6"
         onSubmit={handleSubmit(onSubmit)}
