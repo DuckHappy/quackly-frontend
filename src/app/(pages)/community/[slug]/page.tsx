@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Metadata } from "next";
-import CommunityClient from "./CommunityClient";
+import CommunityClient from "../[slug]/CommunityClient";
 
 interface Props {
   params: { slug: string };
