@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 type PostProps = {
-  postId?: string;
+  postId?: string | number;
   avatar: string;
   username: string;
   time: string;
@@ -11,6 +11,7 @@ type PostProps = {
   likes: number;
   comments: number;
   shares: number;
+  onDelete?: (postId?: string | number) => void;
 };
 
 export function Post({
@@ -22,6 +23,7 @@ export function Post({
   likes,
   comments,
   shares,
+  onDelete,
 }: PostProps) {
   const [likeCount, setLikeCount] = useState(likes);
   const [commentCount, setCommentCount] = useState(comments);
@@ -43,11 +45,26 @@ export function Post({
     alert("🔁 Compartido (simulado)");
   };
 
+  const handleDelete = () => {
+    if (confirm("¿Seguro que querés eliminar este post?")) {
+      onDelete?.(postId);
+    }
+  };
+
   return (
-    <article className="bg-sky-50 border border-sky-200 rounded-xl shadow-sm p-4">
+    <article className="relative bg-sky-50 border border-sky-200 rounded-xl shadow-sm p-4">
+      {/* Botón eliminar */}
+      <button
+        onClick={handleDelete}
+        className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition text-sm"
+        title="Eliminar post"
+      >
+        ✖
+      </button>
+
       <div className="flex items-center mb-2">
         <Image
-          src={avatar || '/quackly-logov1.png'}
+          src={avatar || "/quackly-logov1.png"}
           alt={`${username} avatar`}
           width={36}
           height={36}
