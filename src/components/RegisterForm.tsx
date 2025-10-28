@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { mappedGenders, userSchema } from "@/validations/userSchema";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 interface registerData {
   fullname: string;
@@ -13,6 +15,10 @@ interface registerData {
 }
 
 export default function RegisterForm() {
+
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -29,11 +35,39 @@ export default function RegisterForm() {
     </option>
   ));
 
-  const onSubmit = (data: registerData) => {
-    localStorage.setItem("registerData", JSON.stringify(data));
-    console.log(data);
-    reset();
-  };
+  const onSubmit = async (data: registerData) => {
+    setError(null);
+    try {
+      const response = await fetch ("https://quackly.onrender.com/users/register" , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+      })
+
+      if(!response.ok) {
+        const errBody = await response.json().catch(() => ({}))
+        const message =
+        (errBody && (errBody.message || errBody.error)) || 
+        "Datos ingresados invalidos para el registro."
+        setError(message)
+        console.error("Register failed", response.status, errBody)
+      
+      }if(response.ok) {
+        const { password, confirmPassword, ...safeData } = data;
+        localStorage.setItem("registerData", JSON.stringify(safeData))
+
+        reset()
+
+        router.push("/login")
+      }
+
+    }catch(error) {
+        console.error(error)
+        setError("Ocurrió un error inesperado. Intenta nuevamente")
+    }
+  }
 
   return (
     <div className="flex justify-center items-start w-full mt-8">
