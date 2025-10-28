@@ -84,7 +84,7 @@ export default async function CommunityPage({ params }: Props) {
   const posts = await getPosts();
 
   return (
-    <main className="relative min-h-screen bg-gradient-to-b to-sky-200 flex flex-col items-center py-8">
+    <main className="relative flex flex-col items-center py-8">
       {/* Header */}
       <header className="w-full max-w-5xl bg-sky-50/70 border border-sky-200 rounded-xl shadow-sm p-6 mb-6 flex items-center gap-3">
         <Image
