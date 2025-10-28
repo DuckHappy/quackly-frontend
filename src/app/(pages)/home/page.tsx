@@ -11,9 +11,9 @@ async function getPosts() {
   return [
     {
       id: 1,
-      avatar: "/avatars/duckPro.png",
-      username: "DuckHappy",
-      content: "Dos patos en una carrera, ¿sabes cómo acaban?... Empatados",
+      avatar: "/avatars/duckSanty.png", //santy
+      username: "Santiago",
+      content: "Hoy encontre dos gatitos lindos",
       likes: 5,
       comments: 3,
       shares: 2,
@@ -21,9 +21,9 @@ async function getPosts() {
     },
     {
       id: 2,
-      avatar: "/avatars/duckPro.png",
-      username: "DuckHappy",
-      content: "Día perfecto para nadar 🦆",
+      avatar: "/avatars/duckGaby.png", //gaby
+      username: "Gabriel",
+      content: "El enano me volvio a bajar la termica, me quede sin luz",
       likes: 5,
       comments: 3,
       shares: 2,
@@ -31,24 +31,59 @@ async function getPosts() {
     },
     {
       id: 3,
-      avatar: "/avatars/duckMusic.png",
-      username: "DuckMusic",
-      content: "Escuchando mi playlist favorita de música acuática 🎵🦆",
+      avatar: "/avatars/duckMauro.png", //Mauro
+      username: "Mauro Diaz",
+      content: "estoy cansado jefe",
       likes: 8,
       comments: 5,
       shares: 6,
       time: "6h",
     },
+
     {
       id: 4,
-      avatar: "/avatars/duck_eyesClose.png",
-      username: "DuckEyes",
+      avatar: "/avatars/duckVictor.png", //Victor
+      username: "Victor",
       content: "Tomando el sol en el lago ☀️🦆",
       likes: 6,
       comments: 4,
       shares: 3,
       time: "8h",
     },
+
+    {
+      id: 5,
+      avatar: "/avatars/duckHeadset.png", //Sabri
+      username: "Sabrina Ortiz",
+      content: "Tomando el sol en el lago ☀️🦆",
+      likes: 6,
+      comments: 4,
+      shares: 3,
+      time: "8h",
+    },
+
+    {
+      id: 6,
+      avatar: "/avatars/duckBoy.png", //Nicolas
+      username: "Nicolas Rodriguez",
+      content: "Tomando el sol en el lago ☀️🦆",
+      likes: 6,
+      comments: 4,
+      shares: 3,
+      time: "8h",
+    },
+
+    {
+      id: 7,
+      avatar: "/avatars/duckVer1.png",  //Benjamin
+      username: "Benjamin",
+      content: "Tomando el sol en el lago ☀️🦆",
+      likes: 6,
+      comments: 4,
+      shares: 3,
+      time: "8h",
+    },
+    
   ];
 }
 
