@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { Post } from "./Post";
 import { EditProfile } from "./EditProfile";
+import FAB from '@/components/FAB';
+import PostModal from '@/components/PostModal';
 
 interface Post {
   id: number;
@@ -31,10 +33,25 @@ interface ProfileClientProps {
   user: User;
 }
 
-export function ProfileClient({ user, posts }: ProfileClientProps) {
+export function ProfileClient({ user, posts: initialPosts }: ProfileClientProps) {
   const [showModal, setShowModal] = useState(false);
   const [bio, setBio] = useState(user.bio);
   const [avatar, setAvatar] = useState(user.avatar);
+  const [posts, setPosts] = useState(initialPosts);
+  const [openPostModal, setOpenPostModal] = useState(false);
+
+  function addPost({text}: {text:string}) {
+    const newPost = {
+      id: Math.random(),
+      content: text,
+      likes: 0,
+      comments: 0,
+      shares: 0,
+      time: 'now'
+    };
+    
+    setPosts(current => [newPost, ...current]);
+  }
 
   return (
     <>
@@ -93,6 +110,7 @@ export function ProfileClient({ user, posts }: ProfileClientProps) {
         {posts.map((p: Post) => (
           <Post
             key={p.id}
+            postId={p.id}
             avatar={avatar}
             username={user.username}
             time={p.time}
@@ -100,8 +118,11 @@ export function ProfileClient({ user, posts }: ProfileClientProps) {
             likes={p.likes}
             comments={p.comments}
             shares={p.shares}
+            onDelete={(id) => setPosts(posts.filter(post => post.id !== id))}
           />
         ))}
+        <FAB onClick={() => setOpenPostModal(true)} />
+        <PostModal open={openPostModal} onClose={() => setOpenPostModal(false)} onPost={addPost} />
       </section>
 
       {/* Modal de edición */}
