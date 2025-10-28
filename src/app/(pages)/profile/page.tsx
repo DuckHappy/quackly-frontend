@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { Post } from "./components/Post";
-import { EditProfile } from "./components/EditProfile";
 import { ProfileClient } from "./components/ProfileClient";
 
 // Simular obtener datos del usuario desde servidor
@@ -23,7 +20,7 @@ async function getPosts() {
   return [
     {
       id: 1,
-      content: "Dos patos en una carrera, ¿sabes cómo acaban?... Empatados",
+      content: "Sabian que existe algo llamado Rubber Duck? es la técnica del patito de goma en programación, donde se explica un problema de código a un objeto inanimado para encontrar el error :P",
       likes: 5,
       comments: 3,
       shares: 2,
@@ -31,7 +28,7 @@ async function getPosts() {
     },
     {
       id: 2,
-      content: "Día perfecto para nadar 🦆",
+      content: "Eres como el click, cada vez que te veo, se dispara mi callback",
       likes: 5,
       comments: 3,
       shares: 2,
@@ -51,3 +48,4 @@ export default async function ProfilePage() {
     </main>
   );
 }
+
