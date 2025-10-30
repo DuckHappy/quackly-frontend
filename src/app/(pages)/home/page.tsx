@@ -55,7 +55,7 @@ async function getPosts() {
       id: 5,
       avatar: "/avatars/duckHeadset.png", //Sabri
       username: "Sabrina Ortiz",
-      content: "Tomando el sol en el lago ☀️🦆",
+      content: "Dicen que los errores te hacen más fuerte jajsajkjs",
       likes: 6,
       comments: 4,
       shares: 3,
