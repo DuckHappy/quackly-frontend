@@ -3,7 +3,7 @@ import { useState } from "react";
 
 interface CategoryButtonProps {
   joined: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function CategoryButton({ joined, onClick }: CategoryButtonProps) {
