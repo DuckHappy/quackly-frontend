@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@types/styled-components": "^5.1.35",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.65.0",
+    "react-toastify": "^11.0.5",
+    "styled-components": "^6.1.19",
     "zod": "^4.1.12"
   },
   "devDependencies": {

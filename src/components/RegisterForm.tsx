@@ -2,7 +2,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { mappedGenders, userSchema } from "@/validations/userSchema";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import styled from 'styled-components';
+
 
 interface registerData {
   fullname: string;
@@ -15,7 +17,6 @@ interface registerData {
 }
 
 export default function RegisterForm() {
-
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
@@ -57,9 +58,7 @@ export default function RegisterForm() {
       }if(response.ok) {
         const { password, confirmPassword, ...safeData } = data;
         localStorage.setItem("registerData", JSON.stringify(safeData))
-
         reset()
-
         router.push("/login")
       }
 
@@ -69,6 +68,7 @@ export default function RegisterForm() {
     }
   }
 
+    
   return (
     <div className="flex justify-center items-start w-full mt-8">
       <form
@@ -198,6 +198,66 @@ export default function RegisterForm() {
           </button>
         </div>
       </form>
+    
+    {/* error personalizado */}
+    {error && (
+      <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[9999]">
+        <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg text-center w-80 relative animate-scaleIn">
+          <h3 className="text-xl font-semibold mb-2 text-gray-800">⚠️ Error al registrarse</h3>
+          <p className="text-gray-700 mb-4">{error}</p>
+          <div className="button-wrapper">
+            <button
+              onClick={() => setError(null)}
+              className="bg-amber-300 hover:bg-blue-400 text-black font-semibold px-5 py-2 rounded-full transition"
+            >
+              OK
+            </button>
+          </div>
+          {/* Icono de cerrar */}
+        </div>
+      </div>
+    )}
     </div>
   );
 }
+
+const StyledWrapper = styled.div`
+  
+.popup {
+    width: 280px;
+    height: fit-content;
+    background-color: rgb(255, 250, 250);
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+  }
+
+  .popup-heading {
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+  }
+  .popup-error {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+  }
+
+  .button-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .svgIconCross {
+    height: 10px;
+  }`;
