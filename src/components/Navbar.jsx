@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import InstallPWAButton from './InstallPWAButton';
 const Icon = ({ d }) => (<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style={{ transition: 'transform .12s ease' }}><path d={d} /></svg>);
 const items = [
   { url: '/home', title: 'Inicio', key: 'home', icon: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' },
@@ -19,6 +20,9 @@ export default function Navbar() {
           </button>
         </a>
       ))}
+      <InstallPWAButton >
+        <Icon d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+      </InstallPWAButton>
     </aside>
   );
 }
