@@ -8,12 +8,12 @@ interface Props {
 
 async function getCommunityData(slug: string) {
   try {
-    const res = await fetch(`http://localhost:3000/community-profile/${slug}`, {
+    const res = await fetch(`https://quackly.onrender.com/community-profile/${slug}`, {
       method: "GET",
       cache: "no-store",
     });
 
-    if (!res.ok) throw new Error("Error al obtener datos desde el backend");
+    // if (!res.ok) throw new Error("Error al obtener datos desde el backend");
 
     const data = await res.json();
 
