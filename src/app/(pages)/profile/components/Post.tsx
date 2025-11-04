@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type PostProps = {
   postId?: string | number;
@@ -33,27 +34,26 @@ export function Post({
   const handleLike = () => {
     setLiked(!liked);
     setLikeCount((prev) => prev + (liked ? -1 : 1));
+    toast.success(liked ? "💔 Quitaste tu me gusta" : "💙 Te gustó este post");
   };
 
   const handleComment = () => {
     setCommentCount((prev) => prev + 1);
-    alert("💬 Comentaste este post (simulado)");
+    toast.info("💬 Comentaste este post ");
   };
 
   const handleShare = () => {
     setShareCount((prev) => prev + 1);
-    alert("🔁 Compartido (simulado)");
+    toast("🔁 Post compartido ", { description: "compartiendo..." });
   };
 
   const handleDelete = () => {
-    if (confirm("¿Seguro que querés eliminar este post?")) {
-      onDelete?.(postId);
-    }
+    onDelete?.(postId);
+    toast.warning("🗑️ Post eliminado");
   };
 
   return (
     <article className="relative bg-sky-50 border border-sky-200 rounded-xl shadow-sm p-4">
-      {/* Botón eliminar */}
       <button
         onClick={handleDelete}
         className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition text-sm"
@@ -81,9 +81,8 @@ export function Post({
       <div className="flex justify-around text-gray-700 text-sm mt-3">
         <button
           onClick={handleLike}
-          className={`flex items-center gap-1 transition ${
-            liked ? "text-sky-600" : "hover:text-sky-500"
-          }`}
+          className={`flex items-center gap-1 transition ${liked ? "text-sky-600" : "hover:text-sky-500"
+            }`}
         >
           {liked ? "💙" : "🤍"} {likeCount}
         </button>
