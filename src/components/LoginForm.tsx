@@ -68,7 +68,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-full w-full flex-col justify-center px-6 py-12 lg:px-8 overflow-auto">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center px-6 py-6 lg:px-8">
       <div className="flex flex-col justify-center items-center">
         <Logo />
 
