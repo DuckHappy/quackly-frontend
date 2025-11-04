@@ -7,14 +7,38 @@ interface Props {
 }
 
 async function getCommunityData(slug: string) {
-  return {
-    name: slug.charAt(0).toUpperCase() + slug.slice(1),
-    description: "Juego de acción y aventuras en 2D con un estilo artístico hand-drawn.",
-    members: 5000,
-    online: 25,
-    logo: "/avatars/duckVer1.png",
-  };
+  try {
+    const res = await fetch(`http://localhost:3000/community-profile/${slug}`, {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error("Error al obtener datos desde el backend");
+
+    const data = await res.json();
+
+    return {
+      name: data.name ?? slug.charAt(0).toUpperCase() + slug.slice(1),
+      description:
+        data.summary ??
+        "Sin descripción disponible. Esta comunidad aún no tiene un resumen generado.",
+      members: data.stats?.postsCount ?? 0,
+      online: data.stats?.commentsCount ?? 0,
+      logo: "/avatars/duckVer1.png",
+    };
+  } catch (error) {
+    console.error("Error obteniendo comunidad IA:", error);
+    return {
+      name: slug.charAt(0).toUpperCase() + slug.slice(1),
+      description:
+        "Juego de acción y aventuras en 2D con un estilo artístico hand-drawn.",
+      members: 5000,
+      online: 25,
+      logo: "/avatars/duckVer1.png",
+    };
+  }
 }
+
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const community = await getCommunityData(params.slug);
